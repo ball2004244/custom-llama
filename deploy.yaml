@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: my-ollama
+  template:
+    metadata:
+      labels:
+        app: my-ollama
+    spec:
+      containers:
+      - name: ollama-agent
+        image: ollama/ollama:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 11434
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ollama-service
+spec:
+  selector:
+    app: my-ollama
+  ports:
+  - protocol: TCP
+    port: 10000
+    targetPort: 11434
