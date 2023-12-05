@@ -7,5 +7,23 @@ We also supply a lightweight web server to communicate with the cluster.
 
 ## How to run
 ### Prerequisite
-- custom-llama docker image
+- Docker
 - Kubernetes
+- LLama 7B docker image
+
+### Run
+1. Build the docker image
+```bash
+docker run -d -p 11434:11434 -v ollama:/usr/.ollama --name my-ollama ollama:latest
+```
+
+2. Run the web server
+```bash
+python3 main.py
+```
+
+3. Write custom CURL
+Check Ollama doc/api.md for more information
+
+## Contributors
+- Jack Nguyen - @ball2004244
